@@ -20,7 +20,7 @@ int main() {
 	// input size가 10억까지 주어지기 때문에 long으로 선언!
 	long x;
 	long y[MAX] = { 0, };
-	long width, height, area;
+	long width, height, area = 0;
 	stack<int> st;
 
 	// 입력값 받기
@@ -40,7 +40,7 @@ int main() {
 		{
 			height = y[st.top()];
 			st.pop();
-			width = i - st.top() - 1;
+			width = i - st.top() - 1; // pop 한 후에 width에서 빼는 거니까 -1 해줘야 원래 width가 맞음
 
 			area = max(area, height*width);
 		}
