@@ -1,3 +1,68 @@
+#include <iostream>
+#include <string.h>
+#include <queue>
+#define MAX 10000
+using namespace std;
+
+int n, m, v;
+bool arr[MAX][MAX] = { false };
+bool visited_dfs[MAX] = { false };
+bool visited_bfs[MAX]= { false };
+queue<int> q;
+
+void DFS(int v) {
+	printf("%d ", v);
+	visited_dfs[v] = true;
+
+	// 세로축을 정점의 개수로 볼 것
+	// 노드 번호는 1번부터 n번까지이므로 **
+	for (int i = 1; i <= n; i++) {
+		// 인접한 정점이고, 방문하지 않은 정점이라면**
+		if (arr[v][i]==true && !visited_dfs[i]) {
+			DFS(i);
+		}
+	}
+}
+
+void BFS(int v) {
+	printf("%d ", v);
+	q.push(v);
+	visited_bfs[v] = true;
+	while (!q.empty()) {
+		// q.pop()해서 하기 전에 받아야함!
+		v = q.front();
+		q.pop();
+		for (int i = 1; i <= n; i++) {
+			if (arr[v][i] && !visited_bfs[i]) {
+				printf("%d ", i);
+				visited_bfs[i] = true;
+				q.push(i);
+			}
+		}
+	}
+}
+
+int main() {
+	// n: 정점의 개수, m: 간선의 개수, v: 탐색을 시작할 정점의 번호
+	cin >> n >> m >> v;
+
+	int a, b;
+
+	for (int i = 0; i < m; i++) {
+		cin >> a >> b;
+
+		// 양방향 간선
+		arr[a][b] = 1;
+		arr[b][a] = 1;
+	}
+	DFS(v);
+	cout << endl;
+	BFS(v);
+
+	return 0;
+}
+
+/*
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -54,3 +119,5 @@ int main() {
 	bfs(start);
 	return 0;
 }
+
+*/
