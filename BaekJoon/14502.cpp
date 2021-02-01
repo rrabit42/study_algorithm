@@ -50,6 +50,7 @@ void DFS(int cnt, int x, int y) {
 		}
 		if (max_area < area)
 			max_area = area;
+		
 	}
 
 	// 가로 끝까지 갔을 때
