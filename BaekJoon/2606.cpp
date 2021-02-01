@@ -1,4 +1,57 @@
 #include <iostream>
+#include <string.h>
+#include <queue>
+#define MAX 101
+
+using namespace std;
+
+int n, u;
+int arr[MAX][MAX] = { 0, }; // 1번부터 들어가니까! 0은 사용X
+int cnt = 0;
+queue<int> q;
+int visited[MAX] = { 0, };
+
+void BFS(int start) {
+	visited[start] = 1;
+	q.push(start);
+
+	while (!q.empty()) {
+		start = q.front();
+		q.pop();
+
+		for (int i = 1; i <= n; i++) {
+			if (arr[start][i] == 1 && visited[i] == 0) {
+				visited[i] = 1;
+				cnt++;
+				q.push(i);
+			}
+		}
+	}
+}
+
+int main() {
+	// 컴퓨터의 수, 100 이하
+	cin >> n;
+
+	// 직접 연결되어 있는 컴퓨터쌍의 수
+	cin >> u;
+
+	int a, b;
+	for (int i = 0; i < u; i++) {
+		cin >> a >> b;
+
+		arr[a][b] = arr[b][a] = 1;
+	}
+
+	// 1번 컴퓨터가 웜 바이러스에 걸렸을 때,
+	// BFS 이용
+	BFS(1);
+	cout << cnt<< '\n'; //visited==1인 개수를 구해도 됐을 듯!
+	return 0;
+}
+
+/*
+#include <iostream>
 #include <queue>
 using namespace std;
 
@@ -42,3 +95,4 @@ int main()
 	bfs(1); // 시작 노드
 	cout << ans;
 }
+*/
