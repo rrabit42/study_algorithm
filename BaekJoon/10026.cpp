@@ -1,3 +1,107 @@
+// BFS 방법!!
+#include <algorithm>
+#include <cstring>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include <queue>
+#define MAX 100
+
+using namespace std;
+
+
+int n, nor_cnt = 0, rg_cnt = 0;
+int nor_arr[MAX][MAX], rg_arr[MAX][MAX];
+int direct[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+bool visited[MAX][MAX]; // 0, 즉, false로 초기화 되어있음
+queue<pair<int, int>> q;
+
+
+void BFS(int row, int column, int(*arr)[MAX]) {
+	
+	int color = arr[row][column]; // 해당 색
+
+	q.push(make_pair(row, column));
+	visited[row][column] = 1;
+
+	while (!q.empty()) {
+
+		pair<int, int> now = q.front();
+		q.pop();
+
+		for (int i = 0; i < 4; i++) {
+
+			int next_row = now.first + direct[i][0];
+			int next_column = now.second + direct[i][1];
+
+			// 범위를 벗어난 좌표
+			if (next_row<0 || next_row>=n || next_column<0 || next_column >=n) {
+				continue;
+			}
+
+			// 같은 (색)구역 모두 찾고 ** 모두 visited로 바꿈!!
+			if (color == arr[next_row][next_column] & !visited[next_row][next_column]) {
+				visited[next_row][next_column] = 1;
+				q.push(make_pair(next_row, next_column));
+			}
+		}
+	}
+}
+
+int main() {
+	
+	cin >> n;
+	string str;
+
+	for (int i = 0; i < n; i++) {
+		cin >> str;
+		for (int j = 0; j < n; j++) {
+			switch (str[j])
+			{
+			case 'R':
+				nor_arr[i][j] = 1;
+				rg_arr[i][j] = 1;
+				break;
+			case 'G':
+				nor_arr[i][j] = 2;
+				rg_arr[i][j] = 1;
+				break;
+			case 'B':
+				nor_arr[i][j] = 3;
+				rg_arr[i][j] = 3;
+				break;
+			}
+		}
+	}
+
+	// BFS
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (visited[i][j] == 0) {
+				BFS(i, j, nor_arr);
+				nor_cnt++; // 한 구역 다 셈!
+			}
+		}
+	}
+	
+	// 초기화 후 사용
+	memset(visited, 0, sizeof(visited));
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			if (visited[i][j] == 0) {
+				BFS(i, j, rg_arr);
+				rg_cnt++; // 한 구역 다 셈!
+			}
+		}
+	}
+
+	cout << nor_cnt << ' ' << rg_cnt << '\n';
+}
+
+// DFS 방법
+
 #include <algorithm>
 #include <iostream>
 #include <stdio.h>
