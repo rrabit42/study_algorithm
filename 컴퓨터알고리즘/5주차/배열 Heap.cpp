@@ -72,9 +72,32 @@ void printHeap(HeapType *h)
 	printf("\n");
 }
 
+void heapSort(HeapType *h, int list[])
+{
+	HeapType heap;
+	init(&heap);
+
+	for (int i = 1; i <= h->heap_size; i++)
+	{
+		heap.heap[i] = h->heap[i];
+		heap.heap_size++;
+	}
+	for (int i = 1; i <= h->heap_size; i++)
+		list[i] = removeMin(&heap);
+}
+
+void printArray(int list[], int n)
+{
+	for (int i = 1; i <= n; i++)
+		printf("[%d] ",list[i]);
+	printf("\n");
+}
+
 int main()
 {
 	HeapType heap;
+	int list[MAX_ELEMENT] = { 0 };
+
 	init(&heap);
 	
 	insertItem(&heap, 5);
@@ -87,6 +110,9 @@ int main()
 	insertItem(&heap, 2);
 	
 	printHeap(&heap);
+
+	heapSort(&heap, list);
+	printArray(list, heap.heap_size);
 
 	printf("deleted key: %d\n", removeMin(&heap));
 	printHeap(&heap);
