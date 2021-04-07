@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define MAX_ELEMENT 100
 
@@ -93,27 +94,30 @@ void printArray(int list[], int n)
 	printf("\n");
 }
 
+// 제자리 힙정렬
+void inPlaceHeapSort(HeapType *h)
+{
+	int size = h->heap_size;
+	int key;
+	for (int i = 0; i < size; i++)
+	{
+		key = removeMin(h);
+		h->heap[h->heap_size + 1] = key;
+	}
+}
+
 int main()
 {
 	HeapType heap;
 	int list[MAX_ELEMENT] = { 0 };
-
+	
+	srand(time(NULL));
 	init(&heap);
-	
-	insertItem(&heap, 5);
-	insertItem(&heap, 3);
-	insertItem(&heap, 7);
-	insertItem(&heap, 4);
-	insertItem(&heap, 1);
-	insertItem(&heap, 4);
-	insertItem(&heap, 8);
-	insertItem(&heap, 2);
-	
+	for (int i = 0; i < 15; i++)
+		insertItem(&heap, rand() % 100);
 	printHeap(&heap);
 
-	heapSort(&heap, list);
-	printArray(list, heap.heap_size);
-
-	printf("deleted key: %d\n", removeMin(&heap));
-	printHeap(&heap);
+	inPlaceHeapSort(&heap);
+	for (int i = 1; heap.heap[i] > -1; i++)
+		printf("[%d] ", heap.heap[i]);
 }
