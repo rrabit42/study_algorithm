@@ -76,3 +76,21 @@ int main() {
 
 	return 0;
 }
+
+
+/*
+	// total 배열(해당 달의 전달까지의 일수)
+	for (int i = 1; i < 13; i++) {
+		for (int j = 1; j < i; j++) {
+			total[i] += days[j];
+		}
+	}
+	
+	// 이렇게하면 됨
+	void solution2() {
+	int date1 = total[mon1] + day1;
+	int date2 = total[mon2] + day2;
+	result = date2 - date1 + 1;
+}
+
+*/
