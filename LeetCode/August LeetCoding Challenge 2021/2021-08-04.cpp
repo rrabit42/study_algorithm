@@ -26,3 +26,31 @@ public:
         return result;
     }
 };
+
+/////////////////////////////////////
+// 더 나은 풀이
+class Solution {
+public:
+    vector<vector<int>> result;
+    
+    void dfs(vector<int>& nums, vector<int> subset){
+        result.push_back(subset);
+        
+        for(int i=0; i<nums.size(); i++){
+            if(i > 0 && (nums[i-1] == nums[i]))
+                continue;
+            subset.push_back(nums[i]);
+            vector<int> tmp = vector<int>(nums.begin()+i+1, nums.end());
+            dfs(tmp, subset);
+            subset.pop_back();
+        }
+    }
+    
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<int> subset;
+        dfs(nums, subset);
+        
+        return result;
+    }
+};
