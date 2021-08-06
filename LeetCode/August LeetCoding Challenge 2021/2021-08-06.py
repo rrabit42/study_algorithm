@@ -30,7 +30,7 @@ from functools import lru_cache # 솔루션 참고ㅋㅋㅋ
 
 class Solution:
     def stoneGame(self, piles: List[int]) -> bool:
-        # 먼저 시작하는 사람이 이길 수 있으면 true 리턴 -> 그냥 높은 경우의수 alex 주면 됨
+        # 먼저 시작하는 사람이 이길 수 있으면 true 리턴 -> 그냥 높은 경우의수 alex 주면 됨(한번이라도 이길 수 있으면 true니까)
         # return true;
 
         # Dp-Top Down => python에서는 시간복잡도 문제 발생 가능 아악
