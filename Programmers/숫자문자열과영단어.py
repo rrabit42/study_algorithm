@@ -31,14 +31,6 @@ def solution(s):
     return answer
 
 # replace 사용
-
-2
-3
-4
-5
-6
-7
-8
 num_dic = {"zero":"0", "one":"1", "two":"2", "three":"3", "four":"4", "five":"5", "six":"6", "seven":"7", "eight":"8", "nine":"9"}
 
 def solution(s):
@@ -46,3 +38,12 @@ def solution(s):
     for key, value in num_dic.items():
         answer = answer.replace(key, value)
     return int(answer)
+
+# dic 말고 array를 쓰되 똑똑하게 index 활용하기
+def solution(s):
+    words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+
+    for i in range(len(words)):
+        s = s.replace(words[i], str(i))
+
+    return int(s)
