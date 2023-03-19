@@ -12,3 +12,7 @@ def solution(array, commands):
 # 더 pythonic 한 코드
 def solution(array, commands):
     return [sorted(array[i-1:j])[k-1] for i,j,k in commands]
+
+# 생각해보면 더 좋을 코드
+def solution(array, commands):
+    return list(map(lambda x:sorted(array[x[0]-1:x[1]])[x[2]-1], commands))
