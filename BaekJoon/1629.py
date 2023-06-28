@@ -18,3 +18,7 @@ def mul(a, b, c):
 
 
 print(mul(a, b, c))
+
+
+# python 패키지 이용하는 법
+print(pow(*map(int, input().split())))
