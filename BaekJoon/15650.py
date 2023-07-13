@@ -28,3 +28,23 @@ def re(start):
       list.pop()
 
 re(1)
+
+###############
+# not in 있을 필요 없음!
+import sys
+input = sys.stdin.readline
+
+n, m = map(int, input().split())
+
+result = []
+def sol(start):
+  if len(result) == m:
+    print(*result)
+    return
+
+  for i in range(start, n+1):
+    result.append(i)
+    sol(i+1)
+    result.pop()
+
+sol(1)
