@@ -20,7 +20,7 @@ for i in range(n-1, -1, -1):
 print(dp[0])
 
 ########################
-# bottom-up은 시간 초과...
+# 이렇게 bottom-up 하면 시간 초과...
 import sys
 input = sys.stdin.readline
 
@@ -35,4 +35,21 @@ for i, (t, p) in enumerate(s):
 
 print(dp)
   
+###########
+# bottom-up 시간 초과 안남!!!!!!!!!
+import sys
 
+input = sys.stdin.readline
+
+def solution():
+    N = int(input())
+    dp = [0]*(N+1)
+    for i in range(N):
+        T, P = map(int, input().split())
+        if dp[i] > dp[i+1]:
+            dp[i+1] = dp[i]
+        if i+T < N+1 and dp[i]+P > dp[i+T]:
+            dp[i+T] = dp[i]+P
+    print(dp[-1])
+
+solution()
