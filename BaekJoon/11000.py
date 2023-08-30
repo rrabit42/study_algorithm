@@ -1,3 +1,30 @@
+#################
+# 최종 코드
+
+import sys
+input = sys.stdin.readline
+import heapq
+
+n = int(input())
+
+classes = []
+for _ in range(n):
+  s, e  = map(int, input().split())
+  classes.append((s,e))
+
+classes.sort(key=lambda x: x[0])
+
+# 끝나는 시간 저장해둔 배열
+# 제일 작은 끝나는 시간보다 수업 시작하는 시간이 더 적으면 교실 더 추가해야함!! ***
+room = [0]
+for s, e in classes:
+  if room[0] <= s:
+    heapq.heappop(room)
+  heapq.heappush(room, e)
+    
+print(len(room))
+
+###############################
 # 시간 초과 내 코드(끝나는 시간 기준) -> 리스트가 진짜 느린가보다...
 import sys
 input = sys.stdin.readline
